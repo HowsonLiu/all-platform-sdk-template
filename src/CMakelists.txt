@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.10)
+project(hello_world)
+aux_source_directory(. SRC)
+add_library(${PROJECT_NAME} STATIC ${SRC})
+install(TARGETS ${PROJECT_NAME} ARCHIVE DESTINATION)
+
+# build .framework not .a
+if(APPLE)
+    set_target_properties(
+        ${PROJECT_NAME} PROPERTIES
+        FRAMEWORK TRUE
+        FRAMEWORK_VERSION CXX
+    )
+endif()
